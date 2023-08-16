@@ -8,8 +8,10 @@
     "flow": "flow status src; test $? -eq 0 -o $? -eq 2",
     "dev": "webpack --progress --colors --watch --config=bin/webpack/dev.config.js",
     "animations": "webpack --progress --colors --config=bin/webpack/animations.config.js",
+    "deepstream": "node deepserver.js",
     "release": "node bin/release.js",
     "serve": "node app",
+    "server": "npm-run-all --parallel serve deepstream",
     "postinstall": " npm run animations && npm run build ",
     "rebuild": "./node_modules/.bin/electron-rebuild  -w uws"
   },
@@ -35,6 +37,8 @@
     "jquery": "1.11.3"
   },
   "devDependencies": {
+    "@deepstream/client": "^4.0.0",
+    "@deepstream/server": "^4.0.0",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
@@ -43,8 +47,6 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "6.16.0",
     "can": "^3.2.2",
-    "@deepstream/server": "^4.0.0",
-    "@deepstream/client": "^4.0.0",
     "electron": "^25.5.0",
     "electron-menu": "^1.0.0",
     "electron-packager": "^10.1.0",
@@ -63,6 +65,7 @@
     "howler": "^2.0.1",
     "jquery": "1.11.3",
     "localforage": "^1.4.3",
+    "npm-run-all": "^4.1.5",
     "optimist": "^0.6.1",
     "pako": "^1.0.4",
     "peer": "^0.2.8",

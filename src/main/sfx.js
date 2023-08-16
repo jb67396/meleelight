@@ -620,8 +620,8 @@ window.changeVolume = function(audioGroup, newVolume, groupType) {
   }
 }
 
-changeVolume(sounds, 0.5, 0);
-changeVolume(MusicManager, 0.3, 1);
+changeVolume(sounds, 0.06, 0);
+changeVolume(MusicManager, 0.01, 1);
 
 window.playSfx = function(name) {
   sounds[name].play();

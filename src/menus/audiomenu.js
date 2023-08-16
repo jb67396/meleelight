@@ -10,7 +10,7 @@ import {MusicManager} from "../main/music";
 /* eslint-disable */
 
 // sounds, music
-export const masterVolume = [0.5,0.3];
+export const masterVolume = [0.3,0.05];
 const audioMenuNames = ["Sounds","Music"];
 let audioMenuSelected = 0;
 export function audioMenuControls (i, input){
@@ -100,22 +100,22 @@ export function audioMenuControls (i, input){
     }
   } else if (audioLevelMoveUp) {
     sounds.menuSelect.play();
-    masterVolume[audioMenuSelected] += 0.1;
+    masterVolume[audioMenuSelected] += 0.05;
     if (masterVolume[audioMenuSelected] > 1) {
       masterVolume[audioMenuSelected] = 1;
     }
   } else if (audioLevelMoveDown) {
     sounds.menuSelect.play();
-    masterVolume[audioMenuSelected] -= 0.1;
+    masterVolume[audioMenuSelected] -= 0.05;
     if (masterVolume[audioMenuSelected] < 0) {
       masterVolume[audioMenuSelected] = 0;
     }
   }
   if (audioLevelMoveDown || audioLevelMoveUp) {
     if (audioMenuSelected == 0) {
-      changeVolume(sounds, masterVolume[0], 0);
+      changeVolume(sounds, masterVolume[0]/5, 0);
     } else {
-      changeVolume(MusicManager, masterVolume[1], 1);
+      changeVolume(MusicManager, masterVolume[1]/5, 1);
     }
   }
 }

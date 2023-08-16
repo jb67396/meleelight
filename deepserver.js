@@ -1,6 +1,5 @@
 const { Deepstream } = require('@deepstream/server')
 
-const server = new Deepstream({});
-server.set('logLevel', 'ERROR');
+const server = new Deepstream({logLevel: "INFO"});
 
 server.start();
