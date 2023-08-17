@@ -22,7 +22,7 @@ import {
   , characterSelections
 } from "../main";
 import {deepObjectMerge} from "../util/deepCopyObject";
-import {setTokenPosSnapToChar, setChosenChar, setChoosingTag} from "../../menus/css";
+import {handPos, setTokenPosSnapToChar, setChosenChar, setChoosingTag} from "../../menus/css";
 import pako from 'pako';
 import {gameSettings, updateGameSettings} from "../../settings";
 import {updateGameTickDelay} from "../replay";
@@ -225,7 +225,9 @@ function startRoom() {
             player[data.playerSlot].phys.pos =  data.position;
             player[data.playerSlot].percent = data.percent;
             player[data.playerSlot].stocks = data.stocks;
-
+            if(data.handPos) {
+                handPos[data.playerSlot] = data.handPos;
+            }
           }
         }
       }
@@ -314,6 +316,9 @@ function sendInputsOverNet(inputBuffer, playerSlot) {
     "percent": player[playerSlot].percent
 
   };
+  if(gameMode == 2) {
+      payload["handPos"] = handPos[playerSlot];
+  }
   ds.event.emit(HOST_GAME_ID + 'player/', {"bstring": JSON.stringify(payload)});
 
 }
@@ -430,24 +435,28 @@ function connect(record, name) {
           syncClient(result[playerstatus]);
           meHost = false;
           updateGameSettings(result[playerstatus].gameSettings);
+          const portsIdx = ports - 1;
 
           ds.event.emit(name + 'playerStatus/', {
             "playerID": playerID,
-            "ports": ports - 1,
+            "ports": portsIdx,
             "currentPlayers": currentPlayers,
             "characterSelections": characterSelections
           });
-          // let playerPayload = deepObjectMerge(true,{}, player[ports],exclusions);
 
+          // let playerPayload = deepObjectMerge(true,{}, player[ports],exclusions);
           let payload = {
             "playerID": playerID,
-            "playerSlot": ports - 1,
+            "playerSlot": portsIdx,
             "inputBuffer": encodeInput(playerInputBuffer[0]),
             // "inputBuffer": playerInputBuffer[0],
-            "position": player[ports].phys.pos,
-            "stocks": player[ports].stocks,
-            "percent": player[ports].percent
+            "position": player[portsIdx].phys.pos,
+            "stocks": player[portsIdx].stocks,
+            "percent": player[portsIdx].percent
           };
+          if(gameMode == 2) {
+              payload["handPos"] = handPos[portsIdx];
+          }
           ds.event.emit(name + 'player/', {"bstring": JSON.stringify(payload)});
           // ds.event.emit(name + 'charSelection/', {"playerSlot": ports -1, "charSelected": characterSelections[0]});
 
@@ -475,7 +484,10 @@ function connect(record, name) {
                   lastRecievedPacket = now;
                   updateGameTickDelay(frameDelay);
                   saveNetworkInputs(data.playerSlot, data.inputBuffer);
-                  player[data.playerSlot].phys.pos =   data.position;
+                  player[data.playerSlot].phys.pos = data.position;
+                  if(data.handPos) {
+                    handPos[data.playerSlot] = data.handPos;
+                  }
                   player[data.playerSlot].percent = data.percent;
                   player[data.playerSlot].stocks = data.stocks;
                 }
