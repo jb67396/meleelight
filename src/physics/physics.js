@@ -740,7 +740,15 @@ const ecbSquashData: [ SquashDatum
     , SquashDatum
     , SquashDatum
     , SquashDatum
+    , SquashDatum
+    , SquashDatum
+    , SquashDatum
+    , SquashDatum
     ] = [nullSquashDatum
+  , nullSquashDatum
+  , nullSquashDatum
+  , nullSquashDatum
+  , nullSquashDatum
   , nullSquashDatum
   , nullSquashDatum
   , nullSquashDatum];

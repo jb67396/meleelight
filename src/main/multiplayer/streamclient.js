@@ -295,7 +295,7 @@ const connectedPeers = {};
 const peerConnections = {};
 const playerStatusRecords = {};
 
-const playerInputBuffer = [nullInputs(), nullInputs(), nullInputs(), nullInputs()];
+const playerInputBuffer = [nullInputs(), nullInputs(), nullInputs(), nullInputs(), nullInputs(), nullInputs(), nullInputs(), nullInputs()];
 
 
 export const giveInputs = {};
@@ -328,7 +328,6 @@ export function updateNetworkInputs(inputBuffer, playerSlot) {
   playerInputBuffer[playerSlot][0] = inputBuffer;
 
   sendInputsOverNet(inputBuffer, playerSlot);
-
 }
 
 export function saveNetworkInputs(playerSlot, inputData) {
@@ -410,7 +409,7 @@ function connect(record, name) {
 
 
     const hostStateRecord = totalPlayerRecord.get();
-    if (hostStateRecord.totalPlayers > 3) {
+    if (hostStateRecord.totalPlayers > 7) { // UPDATE HERE
       alert("Host room is full.");
  
 
@@ -435,11 +434,11 @@ function connect(record, name) {
           syncClient(result[playerstatus]);
           meHost = false;
           updateGameSettings(result[playerstatus].gameSettings);
-          const portsIdx = ports - 1;
+          const myPort = ports - 1;
 
           ds.event.emit(name + 'playerStatus/', {
             "playerID": playerID,
-            "ports": portsIdx,
+            "ports": myPort,
             "currentPlayers": currentPlayers,
             "characterSelections": characterSelections
           });
@@ -447,15 +446,15 @@ function connect(record, name) {
           // let playerPayload = deepObjectMerge(true,{}, player[ports],exclusions);
           let payload = {
             "playerID": playerID,
-            "playerSlot": portsIdx,
+            "playerSlot": myPort,
             "inputBuffer": encodeInput(playerInputBuffer[0]),
             // "inputBuffer": playerInputBuffer[0],
-            "position": player[portsIdx].phys.pos,
-            "stocks": player[portsIdx].stocks,
-            "percent": player[portsIdx].percent
+            "position": player[myPort].phys.pos,
+            "stocks": player[myPort].stocks,
+            "percent": player[myPort].percent
           };
           if(gameMode == 2) {
-              payload["handPos"] = handPos[portsIdx];
+              payload["handPos"] = handPos[myPort];
           }
           ds.event.emit(name + 'player/', {"bstring": JSON.stringify(payload)});
           // ds.event.emit(name + 'charSelection/', {"playerSlot": ports -1, "charSelected": characterSelections[0]});

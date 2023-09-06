@@ -62,20 +62,20 @@ export function setChoosingTag(val) {
   choosingTag = val;
 }
 
-export const handType = [0, 0, 0, 0];
-export const handPos = [new Vec2D(140, 700), new Vec2D(365, 700), new Vec2D(590, 700), new Vec2D(815, 700)];
-export const tokenPos = [new Vec2D(475 - 54, 268), new Vec2D(515 - 54, 268), new Vec2D(475 - 54, 308), new Vec2D(515 - 54, 308)];
-export const chosenChar = [0, 0, 0, 0];
-export const tokenGrabbed = [false, false, false, false];
-export const whichTokenGrabbed = [-1, -1, -1, -1];
-export const occupiedToken = [false, false, false, false];
-export const bHold = [0, 0, 0, 0];
+export const handType = [0, 0, 0, 0, 0, 0, 0, 0];
+export const handPos = [new Vec2D(140, 700), new Vec2D(365, 700), new Vec2D(590, 700), new Vec2D(815, 700), new Vec2D(835, 700), new Vec2D(855, 700), new Vec2D(875, 700), new Vec2D(895, 700)];
+export const tokenPos = [new Vec2D(475 - 54, 268), new Vec2D(515 - 54, 268), new Vec2D(475 - 54, 308), new Vec2D(515 - 54, 308), new Vec2D(515 - 54, 348), new Vec2D(515 - 54, 348), new Vec2D(515 - 54, 388), new Vec2D(515 - 54, 388)];
+export const chosenChar = [0, 0, 0, 0, 0, 0, 0, 0];
+export const tokenGrabbed = [false, false, false, false, false, false, false, false];
+export const whichTokenGrabbed = [-1, -1, -1, -1, -1, -1, -1, -1];
+export const occupiedToken = [false, false, false, false, false, false, false, false];
+export const bHold = [0, 0, 0, 0, 0, 0, 0, 0];
 
 export const cpuSlider = [new Vec2D(152 + 15 + 166 + 0 - 50, 595), new Vec2D(152 + 15 + 166 + 225 - 50, 595), new Vec2D(152 + 15 + 166 + 450 - 50, 595), new Vec2D(152 + 15 + 166 + 675 - 50, 595)];
 
-export const cpuGrabbed = [false, false, false, false];
-export const whichCpuGrabbed = [-1, -1, -1, -1];
-export const occupiedCpu = [false, false, false, false];
+export const cpuGrabbed = [false, false, false, false, false, false, false, false];
+export const whichCpuGrabbed = [-1, -1, -1, -1, -1, -1, -1, -1];
+export const occupiedCpu = [false, false, false, false, false, false, false, false];
 
 export let readyToFight = false;
 
@@ -300,7 +300,7 @@ export function cssControls(i, input) {
           }
         }
       } else {
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 8; j++) {
           //console.log(j+" "+occupiedToken[j]);
           if (!occupiedToken[j] && (playerType[j] == 1 || i == j)) {
             if (handPos[i].y > tokenPos[j].y - 20 && handPos[i].y < tokenPos[j].y + 20 && handPos[i].x > tokenPos[j].x -
@@ -350,7 +350,7 @@ export function cssControls(i, input) {
         occupiedToken[whichTokenGrabbed[i]] = false;
       }
       whichTokenGrabbed[i] = -1;
-      for (var j = 0; j < 4; j++) {
+      for (var j = 0; j < 8; j++) {
         if (handPos[i].y > 430 && handPos[i].y < 485 && handPos[i].x > 109 + j * 225 && handPos[i].x < 207 + j * 225) {
           if (input[i][0].a && !input[i][1].a) {
             sounds.menuSelect.play();
@@ -399,7 +399,7 @@ export function cssControls(i, input) {
       }
     }
     if (!cpuGrabbed[i]) {
-      for (var s = 0; s < 4; s++) {
+      for (var s = 0; s < 8; s++) {
         if (playerType[s] == 1) {
           if (!occupiedCpu[s]) {
             if (handPos[i].y >= cpuSlider[s].y - 25 && handPos[i].y <= cpuSlider[s].y + 25 && handPos[i].x >=
@@ -663,24 +663,24 @@ export function drawCSSInit() {
     }
   }
   bg1.fillStyle = "rgb(49, 52, 56)";
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     bg1.fillRect(145 + i * 225, 430, 210, 280);
     bg1.strokeRect(145 + i * 225, 430, 210, 280);
   }
   bg1.fillStyle = "rgb(55, 58, 62)";
   bg1.strokeStyle = "rgb(72, 77, 85)";
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     bg1.fillRect(158 + i * 225, 440, 184, 260);
     bg1.strokeRect(158 + i * 225, 440, 184, 260);
   }
   bg1.fillStyle = "rgba(255,255,255,0.1)";
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     bg1.fillRect(158 + i * 225, 630, 184, 50);
   }
   bg1.strokeStyle = "rgba(0,0,0,0.2)";
   bg1.fillStyle = "rgba(0,0,0,0.2)";
   bg1.lineWidth = 15;
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     bg1.beginPath();
     bg1.moveTo(150 + i * 225, 435);
     bg1.lineTo(350 + i * 225, 705);
@@ -755,7 +755,7 @@ export function drawCSS() {
     bg1.fill();
   }
   ui.restore();
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     if (playerType[i] > -1) {
       if (playerType[i] == 0 || playerType[i] == 2) {
         switch (i) {
@@ -770,6 +770,18 @@ export function drawCSS() {
             break;
           case 3:
             ui.fillStyle = "rgb(44, 217, 29)";
+            break;
+          case 4:
+            ui.fillStyle = "rgb(17, 27, 3)";
+            break;
+          case 5:
+            ui.fillStyle = "rgb(220, 3, 88)";
+            break;
+          case 6:
+            ui.fillStyle = "rgb(150, 150, 240)";
+            break;
+          case 7:
+            ui.fillStyle = "rgb(0, 35, 90)";
             break;
           default:
             break;
@@ -817,7 +829,7 @@ export function drawCSS() {
     }
   }
   ui.fillStyle = "rgb(82, 81, 81)";
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     ui.fillStyle = "rgb(82, 81, 81)";
     switch (playerType[i]) {
       case 0:
@@ -843,7 +855,7 @@ export function drawCSS() {
   ui.fillStyle = "rgba(0, 0, 0,0.7)";
   ui.strokeStyle = "rgba(0, 0, 0,0.7)";
   ui.lineWidth = 4;
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     ui.beginPath();
     ui.moveTo(160 + i * 225, 424);
     ui.lineTo(215 + i * 225, 424);
@@ -861,7 +873,7 @@ export function drawCSS() {
   }
   ui.fillStyle = "rgb(82, 81, 81)";
   ui.font = "700 22px Arial";
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     ui.fillStyle = "rgb(82, 81, 81)";
     var text = "N/A";
     switch (playerType[i]) {
@@ -883,7 +895,7 @@ export function drawCSS() {
 
     ui.fillText(text, 163 + i * 225, 445);
   }
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 8; i++) {
     if (playerType[i] > -1) {
       var frame = Math.floor(player[i].timer);
       if (frame == 0) {
@@ -1019,7 +1031,7 @@ export function drawCSS() {
   ui.font = "900 31px Arial";
   ui.lineWidth = 2;
   let alreadyDrawn = [false, false, false, false];
-  for (let i = 3; i >= 0; i--) {
+  for (let i = 7; i >= 0; i--) {
     if (playerType[i] > -1) {
       if (tokenGrabbed[i] === false) {
         alreadyDrawn[i] = true;
@@ -1042,6 +1054,18 @@ export function drawCSS() {
               break;
             case 3:
               bgGrad.addColorStop(1, "rgb(36, 242, 45)");
+              break;
+            case 4:
+              bgGrad.addColorStop(1, "rgb(17, 27, 3)");
+              break;
+            case 5:
+              bgGrad.addColorStop(1, "rgb(220, 3, 88)");
+              break;
+            case 6:
+              bgGrad.addColorStop(1, "rgb(150, 150, 240)");
+              break;
+            case 7:
+              bgGrad.addColorStop(1, "rgb(0, 35, 90)");
               break;
             default:
               break;
@@ -1077,7 +1101,7 @@ export function drawCSS() {
       ui.strokeText(text, tokenPos[i].x - 22, tokenPos[i].y + 13);
     }
   }
-  for (let i = 3; i >= 0; i--) {
+  for (let i = 7; i >= 0; i--) {
     if (alreadyDrawn[i] === false) {
       if (playerType[i] > -1) {
         var bgGrad = ui.createLinearGradient(tokenPos[i].x - 100, tokenPos[i].y, tokenPos[i].x + 50, tokenPos[i].y);
@@ -1098,6 +1122,18 @@ export function drawCSS() {
                 break;
               case 3:
                 bgGrad.addColorStop(1, "rgb(36, 242, 45)");
+                break;
+              case 4:
+                ui.fillStyle = "rgb(17, 27, 3)";
+                break;
+              case 5:
+                ui.fillStyle = "rgb(220, 3, 88)";
+                break;
+              case 6:
+                ui.fillStyle = "rgb(150, 150, 240)";
+                break;
+              case 7:
+                ui.fillStyle = "rgb(0, 35, 90)";
                 break;
               default:
                 break;
@@ -1163,6 +1199,18 @@ export function drawCSS() {
       case 3:
         ui.fillStyle = "rgb(36, 242, 45)";
         break;
+      case 4:
+        ui.fillStyle = "rgb(17, 27, 3)";
+        break;
+      case 5:
+        ui.fillStyle = "rgb(220, 3, 88)";
+        break;
+      case 6:
+        ui.fillStyle = "rgb(150, 150, 240)";
+        break;
+      case 7:
+        ui.fillStyle = "rgb(0, 35, 90)";
+        break;
       default:
         break;
     }
@@ -1170,7 +1218,7 @@ export function drawCSS() {
     ui.strokeText("P" + (i + 1), handPos[i].x - 15, handPos[i].y + 60);
   }
   var readyPlayers = 0;
-  for (var k = 0; k < 4; k++) {
+  for (var k = 0; k < 8; k++) {
     if (playerType[k] > -1) {
       readyPlayers++;
       if (readyPlayers >= 2) {

@@ -363,7 +363,7 @@ export function renderPlayer(i) {
             activeStage.offset[1], player[i].charAttributes.hurtboxOffset[0] * 2 * activeStage.scale, player[i].charAttributes.hurtboxOffset[
                 1] * activeStage.scale);
         fg2.fillStyle = makeColour(255, 29, 29, 0.69);
-        for (var j = 0; j < 4; j++) {
+        for (var j = 0; j < 8; j++) {
             switch (j) {
                 case 0:
                     fg2.fillStyle = makeColour(255, 29, 29, 0.69);
@@ -378,6 +378,21 @@ export function renderPlayer(i) {
                     fg2.strokeStyle = makeColour(117, 226, 255, 0.69);
                     break;
                 case 3:
+                    fg2.fillStyle = makeColour(203, 29, 255, 0.69);
+                    fg2.strokeStyle = makeColour(216, 116, 246, 0.69);
+                case 4:
+                    fg2.fillStyle = makeColour(255, 29, 29, 0.69);
+                    fg2.strokeStyle = makeColour(255, 126, 126, 0.69);
+                    break;
+                case 5:
+                    fg2.fillStyle = makeColour(47, 255, 29, 0.69);
+                    fg2.strokeStyle = makeColour(126, 252, 115, 0.69);
+                    break;
+                case 6:
+                    fg2.fillStyle = makeColour(29, 208, 255, 0.69);
+                    fg2.strokeStyle = makeColour(117, 226, 255, 0.69);
+                    break;
+                case 7:
                     fg2.fillStyle = makeColour(203, 29, 255, 0.69);
                     fg2.strokeStyle = makeColour(216, 116, 246, 0.69);
                     break;
@@ -451,7 +466,7 @@ export function renderOverlay(showStock) {
         ui.textAlign = "end";
         ui.save();
         ui.scale(0.8, 1);
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 8; i++) {
             if (playerType[i] > -1) {
                 ui.fillStyle = "rgb(255," + Math.max(255 - player[i].percent, 0) + ", " + Math.max(255 - player[i].percent, 0) +
                     ")";
@@ -462,7 +477,7 @@ export function renderOverlay(showStock) {
             }
         }
         ui.restore();
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < 8; i++) {
             if (playerType[i] > -1) {
                 ui.fillStyle = palettes[pPal[i]][0];
                 for (var j = 0; j < player[i].stocks; j++) {
