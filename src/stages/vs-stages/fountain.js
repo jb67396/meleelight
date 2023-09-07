@@ -123,7 +123,7 @@ export default {
     else {
       updatePlatform(1,0);
       updatePlatform(2,1);
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < 8; j++) {
         if (player[j].phys.grounded) {
           if (player[j].phys.onSurface[0] === 1 && (player[j].phys.onSurface[1] === 1 || player[j].phys.onSurface[1] === 2)) {
             const plat = player[j].phys.onSurface[1];

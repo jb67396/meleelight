@@ -36,7 +36,7 @@ import {isShowSFX, toggleShowSFX} from "main/vfx";
 import {renderVfx} from "./vfx/renderVfx";
 import {Box2D} from "./util/Box2D";
 import {Vec2D} from "./util/Vec2D";
-import {updateNetworkInputs, connectToMPRoom, retrieveNetworkInputs, giveInputs,connectToMPServer, syncGameMode} from "./multiplayer/streamclient";
+import {updateNetworkInputs, connectToMPRoom, retrieveNetworkInputs, giveInputs,connectToMPServer, syncGameMode, syncMatchTimer} from "./multiplayer/streamclient";
 import {saveGameState, loadReplay, gameTickDelay} from "./replay";
 import {keyboardMap, showButton, nullInputs, pollInputs, inputData, setCustomCenters, nullInput} from "../input/input";
 import {deaden} from "../input/meleeInputs";
@@ -346,6 +346,8 @@ export function matchTimerTick (input){
     dom.matchMinutes.innerHTML = Math.floor(matchTimer / 60);
     dom.matchSeconds.innerHTML = sec.length < 5 ? `0${sec}` : sec;
   }
+
+  syncMatchTimer(matchTimer);
 
   if (matchTimer <= 0) {
     finishGame(input);

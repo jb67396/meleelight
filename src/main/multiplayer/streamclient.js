@@ -19,6 +19,7 @@ import {
   , gameMode
   , stageSelect
   , matchTimer
+  , setMatchTimer
   , characterSelections
 } from "../main";
 import {deepObjectMerge} from "../util/deepCopyObject";
@@ -273,7 +274,11 @@ function startRoom() {
       syncMatchTimer(matchTimer);
 
     });
-
+    ds.event.subscribe(GAME_ID + 'matchTimer/', data => {
+        if(!meHost) {
+            setMatchTimer(data.timer);
+        }
+    });
   });
 
 
@@ -583,7 +588,7 @@ export function syncTagText(playerSlot, tagText) {
   }
 }
 export function syncMatchTimer(timer) {
-  if (HOST_GAME_ID !== null) {
+  if (HOST_GAME_ID !== null && meHost) {
     ds.event.emit(HOST_GAME_ID + 'matchTimer/', {"matchTimer": timer});
   }
 }

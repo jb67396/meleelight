@@ -157,7 +157,7 @@ export function isFinalDeath (){
   } else {
     let finalDeaths = 0;
     let totalPlayers = 0;
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 8; j++) {
       if (playerType[j] > -1) {
         totalPlayers++;
         if (player[j].stocks == 0) {

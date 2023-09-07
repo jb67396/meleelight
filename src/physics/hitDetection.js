@@ -23,7 +23,7 @@ const angleConversion = Math.PI / 180;
 
 export function hitDetect (p,input){
     var attackerClank = false;
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 8; i++) {
         if (playerType[i] > -1) {
             if (i != p) {
                 // check if victim is already in hitList
@@ -36,7 +36,7 @@ export function hitDetect (p,input){
                 }
                 if (!inHitList) {
                     var storedPhantom = -1;
-                    for (var j = 0; j < 4; j++) {
+                    for (var j = 0; j < 8; j++) {
                         if (player[p].hitboxes.active[j] && player[p].phys.prevFrameHitboxes.active[j]) {
                             var interpolate = true;
                         } else {
@@ -48,7 +48,7 @@ export function hitDetect (p,input){
                             // clank == 6 means special clank
                             if (player[p].hitboxes.id[j].clank == 1 || (player[p].hitboxes.id[j].clank == 2 && player[p].phys.grounded) ||
                                 player[p].hitboxes.id[j].clank == 6) {
-                                for (var k = 0; k < 4; k++) {
+                                for (var k = 0; k < 8; k++) {
                                     if (player[i].hitboxes.active[k] && (player[i].hitboxes.id[k].clank == 1 || (player[i].hitboxes.id[
                                             k].clank == 2 && player[i].phys.grounded) || (player[p].hitboxes.id[j].clank == 6 && player[i]
                                             .hitboxes.id[k].clank != 6))) {

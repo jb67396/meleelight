@@ -64,7 +64,7 @@ export function setChoosingTag(val) {
 
 export const handType = [0, 0, 0, 0, 0, 0, 0, 0];
 export const handPos = [new Vec2D(140, 700), new Vec2D(365, 700), new Vec2D(590, 700), new Vec2D(815, 700), new Vec2D(835, 700), new Vec2D(855, 700), new Vec2D(875, 700), new Vec2D(895, 700)];
-export const tokenPos = [new Vec2D(475 - 54, 268), new Vec2D(515 - 54, 268), new Vec2D(475 - 54, 308), new Vec2D(515 - 54, 308), new Vec2D(515 - 54, 348), new Vec2D(515 - 54, 348), new Vec2D(515 - 54, 388), new Vec2D(515 - 54, 388)];
+export const tokenPos = [new Vec2D(475 - 54, 268), new Vec2D(515 - 54, 268), new Vec2D(475 - 54, 308), new Vec2D(515 - 54, 308), new Vec2D(475 - 54, 348), new Vec2D(515 - 54, 348), new Vec2D(475 - 54, 388), new Vec2D(515 - 54, 388)];
 export const chosenChar = [0, 0, 0, 0, 0, 0, 0, 0];
 export const tokenGrabbed = [false, false, false, false, false, false, false, false];
 export const whichTokenGrabbed = [-1, -1, -1, -1, -1, -1, -1, -1];

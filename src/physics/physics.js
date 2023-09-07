@@ -902,7 +902,7 @@ function dealWithLedges(i: number, input: any): void {
   if (player[i].phys.onLedge === -1 && !player[i].phys.ledgeRegrabCount) {
     for (let j = 0; j < activeStage.ledge.length; j++) {
       let ledgeAvailable = true;
-      for (let k = 0; k < 4; k++) {
+      for (let k = 0; k < 8; k++) {
         if (playerType[k] > -1) {
           if (k !== i) {
             if (player[k].phys.onLedge === j) {
@@ -995,7 +995,7 @@ function dealWithDeath(i: number, input: any): void {
 
 function updateHitboxes(i: number): void {
   player[i].phys.isInterpolated = false;
-  for (let j = 0; j < 4; j++) {
+  for (let j = 0; j < 8; j++) {
     if (player[i].hitboxes.active[j] && player[i].phys.prevFrameHitboxes.active[j]) {
       if (player[i].phys.prevFrameHitboxes.id[j].offset[player[i].phys.prevFrameHitboxes.frame] === undefined) {
         continue;
@@ -1165,7 +1165,7 @@ export function physics (i : number, input : any) : void {
         player[i].phys.shielding = false;
       }
       if (player[i].phys.grounded) {
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j < 8; j++) {
           if (playerType[j] > -1) {
             if (i !== j) {
               if (player[j].phys.grounded &&
