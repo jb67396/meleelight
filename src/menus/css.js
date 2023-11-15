@@ -33,7 +33,7 @@ import {actionStates} from "physics/actionStateShortcuts";
 import {setCS, gameMode} from "../main/main";
 import {chars} from "../main/characters";
 import {Vec2D} from "../main/util/Vec2D";
-import {syncCharacter, syncGameMode, syncTagText, inServerMode} from "../main/multiplayer/streamclient";
+import {myPort,syncCharacter, syncGameMode, syncTagText, inServerMode} from "../main/multiplayer/streamclient";
 import {gameSettings} from "../settings";
 /* eslint-disable */
 
@@ -421,7 +421,7 @@ export function cssControls(i, input) {
       if (gameMode !== 2) {
         cancelSetTag();
       }
-      if (input[i][0].a && !input[i][1].a) {
+      if (input[i][0].a && !input[i][1].a && (i == myPort)) {
         // do tag
         if (handPos[i].x < 154 + i * 225) {
           // random

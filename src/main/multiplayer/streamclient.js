@@ -37,6 +37,7 @@ let playerID;
 export let HOST_GAME_ID = null;
 export let inServerMode = false;
 export let meHost = false;
+export let myPort = -1;
 let joinedGame = false;
 let lastRecievedPacket = 0;
 const usServer = 'wss://deepml.herokuapp.com:443';
@@ -106,6 +107,7 @@ if (localStorage.getItem('pickedServer') === 'america' || localStorage.getItem('
 $("#lanIP").attr('value',localStorage.getItem('lastLANIP'));
 export function logIntoServer() {
   meHost = true;
+  myPort = 0;
   if (localStorage.getItem('pickedServer') === 'america') {
     ds = deepstream(usServer);
     ds.login(_onLoggedIn);
@@ -439,7 +441,7 @@ function connect(record, name) {
           syncClient(result[playerstatus]);
           meHost = false;
           updateGameSettings(result[playerstatus].gameSettings);
-          const myPort = ports - 1;
+          myPort = ports - 1;
 
           ds.event.emit(name + 'playerStatus/', {
             "playerID": playerID,
